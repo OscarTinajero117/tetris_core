@@ -7,8 +7,6 @@ defmodule Tetris.Brick do
     reflection: false
   ]
 
-  # def new(), do: __struct__()
-
   def new_random() do
     %{
       name: random_name(),
@@ -18,18 +16,40 @@ defmodule Tetris.Brick do
       }
   end
 
+  def name_list(), do: ~w(i l z o t)a
+
+  def reflection_list(), do: [true, false]
+
+  def rotation_list(), do: [0, 90, 180, 270]
+
   defp random_name() do
-    ~w(i l z o t)a
+    name_list()
       |> Enum.random
   end
 
   defp random_reflection() do
-    [true, false]
+    reflection_list()
       |> Enum.random
   end
 
   defp random_rotation() do
-    [0, 90, 180, 270]
+    rotation_list()
       |> Enum.random
+  end
+
+  def up(brick) do
+    nil
+  end
+
+  def down(brick) do
+    nil
+  end
+
+  def left(brick) do
+    nil
+  end
+
+  def right(brick) do
+    nil
   end
 end

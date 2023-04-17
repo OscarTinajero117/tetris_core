@@ -1,5 +1,7 @@
 defmodule Tetris.Brick do
-
+  @moduledoc """
+  # Documentation for `Tetris.Brick`.
+  """
   defstruct [
     name: :i,
     location: {40, 0},
@@ -7,8 +9,23 @@ defmodule Tetris.Brick do
     reflection: false
   ]
 
+  @doc """
+  ## Tetris.Brick.new_random.
+
+  Creates a random brick
+
+  ## Examples
+
+      iex> Tetris.Brick.new_random()
+      %{
+        location: {40, 0},
+        name: :i,
+        reflection: true,
+        rotation: 90
+      }
+  """
   def new_random() do
-    %{
+    %__MODULE__{
       name: random_name(),
       location: {40, 0},
       rotation: random_rotation(),
@@ -16,11 +33,65 @@ defmodule Tetris.Brick do
       }
   end
 
+  @doc """
+  ## Tetris.Brick.name_list.
+
+  Creates the list of names
+
+  ## Examples
+
+      iex> Tetris.Brick.name_list()
+      [:i, :l, :z, :o, :t]
+  """
   def name_list(), do: ~w(i l z o t)a
 
+  @doc """
+  ## Tetris.Brick.reflection_list.
+
+  Creates the list of reflections
+
+  ## Examples
+
+      iex> Tetris.Brick.reflection_list()
+      [true, false]
+  """
   def reflection_list(), do: [true, false]
 
+  @doc """
+  ## Tetris.Brick.rotation_list.
+
+  Creates the list of rotations
+
+  ## Examples
+
+      iex> Tetris.Brick.rotation_list()
+      [0, 90, 180, 270]
+  """
   def rotation_list(), do: [0, 90, 180, 270]
+
+  def up(brick) do
+    # TODO: Move brick to final position
+  end
+
+  def down(brick) do
+    %{brick | location: point_down(brick.location)}
+  end
+
+  def left(brick) do
+    %{brick | location: point_left(brick.location)}
+  end
+
+  def right(brick) do
+    %{brick | location: point_right(brick.location)}
+  end
+
+  def spin_90(brick) do
+    %{brick | rotation: rotate(brick.rotation)}
+  end
+
+  defp rotate(270), do: 0
+
+  defp rotate(degrees), do: degrees + 90
 
   defp random_name() do
     name_list()
@@ -37,19 +108,15 @@ defmodule Tetris.Brick do
       |> Enum.random
   end
 
-  def up(brick) do
-    nil
+  defp point_down({x, y}) do
+    {x, y + 1}
   end
 
-  def down(brick) do
-    nil
+  defp point_left({x, y}) do
+    {x - 1, y}
   end
 
-  def left(brick) do
-    nil
-  end
-
-  def right(brick) do
-    nil
+  defp point_right({x, y}) do
+    {x + 1, y}
   end
 end

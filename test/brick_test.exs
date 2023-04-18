@@ -17,11 +17,9 @@ defmodule BrickTest do
     test "Check a reflection brick" do
       assert new_random().reflection in reflection_list()
     end
-
   end
 
   describe "Move brick" do
-
     test "Move brick down" do
       brick = new_random()
       {x, y} = brick.location
@@ -49,8 +47,68 @@ defmodule BrickTest do
         270 -> assert spin_90(brick).rotation == 0
         _ -> assert spin_90(brick).rotation == rotation + 90
       end
-
     end
   end
 
+  describe "Check brick shape" do
+    test "Should return points for :i shape" do
+      brick = new_random()
+      brick = %{brick | name: :i}
+
+      assert shape(brick) == [
+               {2, 1},
+               {2, 2},
+               {2, 3},
+               {2, 4}
+             ]
+    end
+
+    test "Should return points for :l shape" do
+      brick = new_random()
+      brick = %{brick | name: :l}
+
+      assert shape(brick) == [
+               {2, 1},
+               {2, 2},
+               {2, 3},
+               {3, 3}
+             ]
+    end
+
+    test "Should return points for :o shape" do
+      brick = new_random()
+      brick = %{brick | name: :o}
+
+      assert shape(brick) == [
+               {2, 2},
+               {3, 2},
+               {2, 3},
+               {3, 3}
+             ]
+    end
+
+    test "Should return points for :z shape" do
+      brick = new_random()
+      brick = %{brick | name: :z}
+
+      assert shape(brick) == [
+               {2, 2},
+               {2, 3},
+               {3, 3},
+               {3, 4}
+             ]
+    end
+
+    test "Should return points for :t shape" do
+      brick = new_random()
+      brick = %{brick | name: :t}
+
+      assert shape(brick) == [
+               {2, 1},
+               {2, 2},
+               {3, 2},
+               {2, 3}
+             ]
+    end
+  end
 end

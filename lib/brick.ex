@@ -134,7 +134,7 @@ defmodule Tetris.Brick do
   def color(%{name: :z}), do: :orange
   def color(%{name: :o}), do: :red
   def color(%{name: :t}), do: :yellow
-  
+
   def prepare(brick) do
     brick
     |> shape()
@@ -187,8 +187,10 @@ defmodule Tetris.Brick do
       concat([
         Tetris.Brick.to_string(brick),
         "\n",
-        inspect(brick.location), " ",
-        inspect(brick.reflection), " ",
+        inspect(brick.location),
+        " ",
+        inspect(brick.reflection),
+        " ",
         inspect(brick.rotation)
       ])
     end

@@ -1,4 +1,6 @@
 defmodule Tetris.Brick do
+  alias Tetris.Points
+
   @moduledoc """
   # Documentation for `Tetris.Brick`.
   """
@@ -67,9 +69,9 @@ defmodule Tetris.Brick do
   """
   def rotation_list(), do: [0, 90, 180, 270]
 
-  def up(brick) do
-    # TODO: Move brick to final position
-  end
+  # def up(brick) do
+  # TODO: Move brick to final position
+  # end
 
   def down(brick), do: %{brick | location: point_down(brick.location)}
 
@@ -122,6 +124,20 @@ defmodule Tetris.Brick do
       {3, 2},
       {2, 3}
     ]
+  end
+
+  def to_string(block) do
+    block
+    |> shape()
+    |> Points.to_string()
+  end
+
+  def print(brick) do
+    brick
+    |> shape
+    |> Points.print()
+
+    brick
   end
 
   defp rotate(270), do: 0

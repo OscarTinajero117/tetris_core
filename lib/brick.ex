@@ -4,6 +4,7 @@ defmodule Tetris.Brick do
   @moduledoc """
   # Documentation for `Tetris.Brick`.
   """
+  @x_center 40
   defstruct name: :i,
             location: {40, 0},
             rotation: 0,
@@ -73,6 +74,8 @@ defmodule Tetris.Brick do
   # TODO: Move brick to final position
   # end
 
+  def x_center(), do: @x_center
+
   def down(brick), do: %{brick | location: point_down(brick.location)}
 
   def left(brick), do: %{brick | location: point_left(brick.location)}
@@ -126,15 +129,28 @@ defmodule Tetris.Brick do
     ]
   end
 
-  def to_string(block) do
-    block
+  def color(%{name: :i}), do: :blue
+  def color(%{name: :l}), do: :green
+  def color(%{name: :z}), do: :orange
+  def color(%{name: :o}), do: :red
+  def color(%{name: :t}), do: :yellow
+  
+  def prepare(brick) do
+    brick
     |> shape()
+    |> Points.rotate(brick.rotation)
+    |> Points.mirror(brick.reflection)
+  end
+
+  def to_string(brick) do
+    brick
+    |> prepare()
     |> Points.to_string()
   end
 
   def print(brick) do
     brick
-    |> shape
+    |> prepare()
     |> Points.print()
 
     brick
@@ -162,5 +178,19 @@ defmodule Tetris.Brick do
   defp random_rotation() do
     rotation_list()
     |> Enum.random()
+  end
+
+  defimpl Inspect, for: Tetris.Brick do
+    import Inspect.Algebra
+
+    def inspect(brick, _opts) do
+      concat([
+        Tetris.Brick.to_string(brick),
+        "\n",
+        inspect(brick.location), " ",
+        inspect(brick.reflection), " ",
+        inspect(brick.rotation)
+      ])
+    end
   end
 end

@@ -1,6 +1,6 @@
-defmodule TetrisCore do
+defmodule Tetris do
   @moduledoc """
-  Documentation for `TetrisCore`.
+  Documentation for `Tetris`.
   """
 
   @doc """
@@ -8,7 +8,7 @@ defmodule TetrisCore do
 
   ## Examples
 
-      iex> TetrisCore.hello()
+      iex> Tetris.hello()
       :world
 
   """

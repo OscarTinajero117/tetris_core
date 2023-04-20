@@ -3,7 +3,7 @@ defmodule PointsTest do
 
   import Tetris.Points
 
-  doctest TetrisCore
+  doctest Tetris
 
   describe "Check Translate and Rotation" do
     test "Should flip, rotate and mirror" do

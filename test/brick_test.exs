@@ -3,7 +3,7 @@ defmodule BrickTest do
 
   import Tetris.Brick
 
-  doctest TetrisCore
+  doctest Tetris
 
   describe "Creates a random brick" do
     test "Check a random name brick" do

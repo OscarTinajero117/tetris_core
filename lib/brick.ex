@@ -131,9 +131,9 @@ defmodule Tetris.Brick do
 
   def color(%{name: :i}), do: :blue
   def color(%{name: :l}), do: :green
-  def color(%{name: :z}), do: :orange
-  def color(%{name: :o}), do: :red
-  def color(%{name: :t}), do: :yellow
+  def color(%{name: :z}), do: :grey
+  def color(%{name: :o}), do: :orange
+  def color(%{name: :t}), do: :red
 
   def prepare(brick) do
     brick

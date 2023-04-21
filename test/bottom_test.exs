@@ -43,6 +43,29 @@ defmodule BottomTest do
     end
   end
 
+  describe "Test Complete" do
+    test "Check complete ys" do
+     b = complete_bottom(20, [{{19, 19}, {19, 19, :red}}])
+      assert complete_ys(b) == [20]
+    end
+
+    test "Collapse single row" do
+      b = complete_bottom(20, [{{19, 19}, {19, 19, :red}}])
+      actual = Map.keys(collapse_row(b, 20))
+      refute {19, 19} in actual
+      assert {19, 20} in actual
+      assert Enum.count(actual) == 1
+    end
+
+    defp complete_bottom(complete_row, xtras) do
+       (xtras ++ (1..10
+      |> Enum.map(fn x -> 
+        {{x, complete_row}, {x, complete_row, :red}} 
+        end)))
+      |> Map.new()
+    end
+  end
+
   defp bottom do
     %{{1, 1} => {1, 1, :blue}}
   end

@@ -15,6 +15,8 @@ defmodule Tetris do
   end
 
   def maybe_do_drop(true = _collided, bottom, old_brick, _new_brick, color) do
+    new_brick = Brick.new_random()
+
     points =
       old_brick
       |> prepare
@@ -26,9 +28,10 @@ defmodule Tetris do
       |> Bottom.full_collapse()
 
     %{
-      brick: Brick.new_random(),
+      brick: new_brick,
       bottom: new_bottom,
-      score: score(count)
+      score: score(count),
+      game_over: Bottom.collides?(new_bottom, prepare(new_brick))
     }
   end
 
@@ -36,7 +39,8 @@ defmodule Tetris do
     %{
       brick: new_brick,
       bottom: bottom,
-      score: 1
+      score: 1,
+      game_over: false
     }
   end
 

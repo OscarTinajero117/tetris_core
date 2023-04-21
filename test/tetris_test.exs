@@ -46,6 +46,25 @@ defmodule TetrisTest do
       actual = drop(brick, bottom, :red)
 
       assert Map.get(actual.bottom, {7, 20}) == {7, 20, :red}
+      assert actual.score == 0
+    end
+
+    test "Drops to bottom and compresses" do
+      brick = Brick.debug_brick(location: {5, 16})
+
+      bottom =
+        for x <- 1..10,
+            y <- 17..20,
+            x != 7
+            do
+              {{x, y}, {x, y, :red}}
+            end
+              |> Map.new()
+
+      actual = drop(brick, bottom, :red)
+
+      assert actual.bottom == %{}
+      assert actual.score == 1600
     end
   end
 end

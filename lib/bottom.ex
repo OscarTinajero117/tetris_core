@@ -53,9 +53,9 @@ defmodule Tetris.Bottom do
   end
 
   def full_collapse(bottom) do
-    rows = 
-      bottom 
-      |> complete_ys() 
+    rows =
+      bottom
+      |> complete_ys()
       |> Enum.sort()
 
     new_bottom = Enum.reduce(rows, bottom, &collapse_row(&2, &1))

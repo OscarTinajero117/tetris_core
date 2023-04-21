@@ -55,11 +55,10 @@ defmodule TetrisTest do
       bottom =
         for x <- 1..10,
             y <- 17..20,
-            x != 7
-            do
-              {{x, y}, {x, y, :red}}
-            end
-              |> Map.new()
+            x != 7 do
+          {{x, y}, {x, y, :red}}
+        end
+        |> Map.new()
 
       actual = drop(brick, bottom, :red)
 

@@ -10,7 +10,7 @@ defmodule Tetris.Brick do
             rotation: 0,
             reflection: false
 
-  def debug_brick(attrs \\ []), do: __struct__(attrs) 
+  def debug_brick(attrs \\ []), do: __struct__(attrs)
 
   @doc """
   ## Tetris.Brick.new_random.

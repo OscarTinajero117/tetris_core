@@ -3,18 +3,18 @@ defmodule TetrisTest do
 
   import Tetris
   alias Tetris.{Brick}
-  
+
   describe "Get out of size" do
     test "Try to move right, success" do
       brick = Brick.debug_brick(location: {5, 1})
       bottom = %{}
 
-      expected = brick |> Brick.right
+      expected = brick |> Brick.right()
       actual = try_right(brick, bottom)
 
       assert expected == actual
     end
-    
+
     test "Try to move right, failure (returns origianl brick)" do
       brick = Brick.debug_brick(location: {8, 1})
       bottom = %{}
@@ -29,10 +29,11 @@ defmodule TetrisTest do
       bottom = %{}
 
       expected = %{
-        brick: brick |> Brick.down,
+        brick: brick |> Brick.down(),
         bottom: bottom,
         score: 1
       }
+
       actual = drop(brick, bottom, :red)
 
       assert expected == actual
